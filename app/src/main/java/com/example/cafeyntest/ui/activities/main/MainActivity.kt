@@ -17,27 +17,15 @@ class MainActivity : AppCompatActivity() {
         detailsFragment = DetailsFragment()
     }
 
-    override fun onBackPressed() {
-        if (detailsFragment.isVisible)
-            supportFragmentManager.beginTransaction().detach(detailsFragment).commit()
-        else
-            super.onBackPressed()
-    }
-
     fun transitionToDetailsFragment(item: HomeRecyclerItem) {
         detailsFragment.arguments = Bundle().apply {
             putParcelable(DetailsFragment.ARG_KEY_ITEM, item)
         }
 
-        if (supportFragmentManager.findFragmentByTag(DetailsFragment.TAG) == null) {
-            supportFragmentManager.beginTransaction()
-                .add(R.id.main_fragment_container, detailsFragment, DetailsFragment.TAG)
-                .commit()
-        } else {
-            supportFragmentManager.beginTransaction()
-                .attach(detailsFragment)
-                .commit()
-        }
+        supportFragmentManager.beginTransaction()
+            .addToBackStack(null)
+            .replace(R.id.main_fragment_container, detailsFragment, DetailsFragment.TAG)
+            .commit()
     }
 
 }

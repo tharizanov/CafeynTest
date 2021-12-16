@@ -1,20 +1,31 @@
 package com.example.cafeyntest.ui.fragments.details
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
-import com.example.cafeyntest.R
+import com.example.cafeyntest.databinding.FragmentDetailsBinding
 import com.example.cafeyntest.domains.ui.HomeRecyclerItem
 
-class DetailsFragment : Fragment(R.layout.fragment_details) {
+class DetailsFragment : Fragment() {
 
-    private val viewModel: DetailsFragmentVM by viewModels()
+    private var binding: FragmentDetailsBinding? = null
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        arguments?.getParcelable<HomeRecyclerItem>(ARG_KEY_ITEM)?.let {
-            viewModel.item.value = it
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        binding = FragmentDetailsBinding.inflate(inflater, container, false).apply {
+            lifecycleOwner = viewLifecycleOwner
+            arguments?.getParcelable<HomeRecyclerItem>(ARG_KEY_ITEM)?.let {
+                item = it
+            }
         }
+
+        return binding?.root
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding = null
     }
 
     companion object {

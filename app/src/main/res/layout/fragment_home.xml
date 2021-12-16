@@ -12,6 +12,6 @@
         android:id="@+id/home_recycler"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:home_items="@{vm.items}" />
+        app:items="@{vm.items}" />
 
 </layout>

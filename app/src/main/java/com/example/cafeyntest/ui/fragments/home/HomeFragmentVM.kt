@@ -1,5 +1,6 @@
 package com.example.cafeyntest.ui.fragments.home
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -11,11 +12,12 @@ import com.example.cafeyntest.network.ApiRequestRepository
 import com.example.cafeyntest.network.RequestResult
 import com.example.cafeyntest.util.SingleLiveEvent
 import kotlinx.coroutines.launch
+import org.greenrobot.eventbus.EventBus
 
 class HomeFragmentVM : ViewModel() {
 
-    val items = MutableLiveData<Collection<HomeRecyclerItem>>()
-    val event = SingleLiveEvent<VMEvent>()
+    val event = SingleLiveEvent<VMEvent?>()
+    val items = MutableLiveData<Collection<HomeRecyclerItem>?>()
 
     init {
         loadData()
@@ -23,6 +25,10 @@ class HomeFragmentVM : ViewModel() {
 
     fun onItemClick(item: HomeRecyclerItem) {
         event.value = ItemClickedEvent(item)
+        Log.d(javaClass.simpleName, "Clicked id: ${item.id}")
+
+        // Fallback due to Fragment subscription not working
+        EventBus.getDefault().post(event.value)
     }
 
     private fun loadData() {
