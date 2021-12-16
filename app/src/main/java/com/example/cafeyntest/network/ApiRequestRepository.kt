@@ -1,10 +1,10 @@
 package com.example.cafeyntest.network
 
-import android.util.Log
 import com.example.cafeyntest.BuildConfig
-import com.example.cafeyntest.domains.network.PhotosResponse
+import com.example.cafeyntest.domains.network.ResponseItem
 import com.google.gson.GsonBuilder
 import com.google.gson.JsonParseException
+import com.google.gson.reflect.TypeToken
 import java.io.InputStreamReader
 import java.io.IOException
 import java.io.Reader
@@ -17,13 +17,13 @@ object ApiRequestRepository {
 
     private val gson = GsonBuilder().create()
 
-    suspend fun requestItems(): RequestResult<PhotosResponse> {
+    suspend fun requestItems(): RequestResult<ArrayList<ResponseItem>> {
         return withContext(Dispatchers.IO) {
             requestItemsBlocking()
         }
     }
 
-    private fun requestItemsBlocking(): RequestResult<PhotosResponse> {
+    private fun requestItemsBlocking(): RequestResult<ArrayList<ResponseItem>> {
         val urlConnection: HttpURLConnection
 
         try {
@@ -47,7 +47,6 @@ object ApiRequestRepository {
                 responseCode.let { code ->
                     if (code in 200..399) {
                         reader = InputStreamReader(inputStream)
-                        Log.e("RESPONSE", reader.readText())
                     } else {
                         return RequestResult.Error(Exception("Bad response code: $code"))
                     }
@@ -57,8 +56,10 @@ object ApiRequestRepository {
             }
         }
 
+        val listType = TypeToken.getParameterized(ArrayList::class.java, ResponseItem::class.java).type
+
         return try {
-            RequestResult.Success(gson.fromJson(reader, PhotosResponse::class.java))
+            RequestResult.Success(gson.fromJson(reader, listType))
         } catch (e: JsonParseException) {
             RequestResult.Error(Exception("JSON parse error: ${e.message}"))
         } finally {

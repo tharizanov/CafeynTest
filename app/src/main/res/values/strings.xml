@@ -1,3 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <string name="app_name">CafeynTest</string>
+
+    <string name="details_id">ID:</string>
+    <string name="details_album_id">Album ID:</string>
+    <string name="details_title">Title:</string>
+
 </resources>

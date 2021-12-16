@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="vm"
+            type="com.example.cafeyntest.ui.fragments.details.DetailsFragmentVM" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/details_img"
+            android:layout_width="@dimen/details_image_width"
+            android:layout_height="@dimen/details_image_height"
+            android:contentDescription="@null"
+            android:scaleType="fitXY"
+            app:image_url="@{vm.item.url}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/details_id_heading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/details_id"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/details_img" />
+
+        <TextView
+            android:id="@+id/details_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{vm.item.id}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/details_id_heading"
+            app:layout_constraintTop_toTopOf="@id/details_id_heading" />
+
+        <TextView
+            android:id="@+id/details_album_id_heading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/details_album_id"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/details_id" />
+
+        <TextView
+            android:id="@+id/details_album_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{vm.item.albumId}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/details_album_id_heading"
+            app:layout_constraintTop_toTopOf="@id/details_album_id_heading" />
+
+        <TextView
+            android:id="@+id/details_title_heading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/details_title"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/details_album_id" />
+
+        <TextView
+            android:id="@+id/details_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{vm.item.title}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/details_title_heading"
+            app:layout_constraintTop_toTopOf="@id/details_title_heading" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
