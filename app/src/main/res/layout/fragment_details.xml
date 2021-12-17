@@ -10,7 +10,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:padding="@dimen/details_margin_between_elements">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/details_img"
@@ -27,6 +28,7 @@
             android:id="@+id/details_id_heading"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/details_margin_between_elements"
             android:text="@string/details_id"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/details_img" />
@@ -37,13 +39,14 @@
             android:layout_height="wrap_content"
             android:text="@{item.id}"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/details_id_heading"
+            app:layout_constraintStart_toStartOf="@id/details_album_id"
             app:layout_constraintTop_toTopOf="@id/details_id_heading" />
 
         <TextView
             android:id="@+id/details_album_id_heading"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/details_margin_between_elements"
             android:text="@string/details_album_id"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/details_id" />
@@ -52,6 +55,7 @@
             android:id="@+id/details_album_id"
             android:layout_width="@dimen/no_dimen"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/details_album_id_margin_start"
             android:text="@{item.albumId}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/details_album_id_heading"
@@ -61,6 +65,7 @@
             android:id="@+id/details_title_heading"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/details_margin_between_elements"
             android:text="@string/details_title"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/details_album_id" />
@@ -72,7 +77,7 @@
             android:singleLine="false"
             android:text="@{item.title}"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/details_title_heading"
+            app:layout_constraintStart_toStartOf="@id/details_album_id"
             app:layout_constraintTop_toTopOf="@id/details_title_heading" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -24,6 +24,12 @@ class MainActivity : AppCompatActivity() {
 
         supportFragmentManager.beginTransaction()
             .addToBackStack(null)
+            .setCustomAnimations(
+                android.R.anim.slide_in_left,
+                android.R.anim.fade_out,
+                android.R.anim.fade_in,
+                android.R.anim.slide_out_right
+            )
             .replace(R.id.main_fragment_container, detailsFragment, DetailsFragment.TAG)
             .commit()
     }
