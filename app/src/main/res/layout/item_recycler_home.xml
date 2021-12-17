@@ -3,6 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+        <import type="com.example.cafeyntest.R" />
+
         <variable
             name="item"
             type="com.example.cafeyntest.domains.ui.HomeRecyclerItem" />
@@ -20,6 +22,7 @@
         android:onClick="@{() -> vm.onItemClick(item)}"
         android:padding="@dimen/home_item_image_margin"
         android:scaleType="fitXY"
-        app:image_url="@{item.thumbnailUrl}" />
+        app:image_url="@{item.thumbnailUrl}"
+        app:placeholder="@{R.drawable.ic_launcher_background}" />
 
 </layout>

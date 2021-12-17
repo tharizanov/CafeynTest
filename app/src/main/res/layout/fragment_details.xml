@@ -3,6 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+        <import type="com.example.cafeyntest.R" />
+
         <variable
             name="item"
             type="com.example.cafeyntest.domains.ui.HomeRecyclerItem" />
@@ -22,7 +24,8 @@
             app:image_url="@{item.url}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:placeholder="@{R.drawable.ic_launcher_background}" />
 
         <TextView
             android:id="@+id/details_id_heading"

@@ -30,7 +30,7 @@ class HomeRecyclerAdapter : RecyclerView.Adapter<HomeRecyclerViewHolder>() {
     override fun getItemCount() = itemsList.size
 
     @SuppressLint("NotifyDataSetChanged")
-    fun setItems(items: Collection<HomeRecyclerItem>?) {
+    fun setItems(items: List<HomeRecyclerItem>?) {
         if (itemsList.isNotEmpty())
             itemsList.clear()
 
