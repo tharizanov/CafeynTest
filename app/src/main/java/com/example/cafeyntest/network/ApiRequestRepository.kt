@@ -48,22 +48,25 @@ object ApiRequestRepository {
                     if (code in 200..399) {
                         reader = InputStreamReader(inputStream)
                     } else {
+                        disconnect()
                         return RequestResult.Error(Exception("Bad response code: $code"))
                     }
                 }
             } catch (e: IOException) {
+                disconnect()
                 return RequestResult.Error(Exception("Connection error: ${e.message}"))
             }
         }
 
-        val listType = TypeToken.getParameterized(ArrayList::class.java, ResponseItem::class.java).type
+        val typeOfArrayList = TypeToken.getParameterized(ArrayList::class.java, ResponseItem::class.java).type
 
         return try {
-            RequestResult.Success(gson.fromJson(reader, listType))
+            RequestResult.Success(gson.fromJson(reader, typeOfArrayList))
         } catch (e: JsonParseException) {
             RequestResult.Error(Exception("JSON parse error: ${e.message}"))
         } finally {
             reader.close()
+            urlConnection.disconnect()
         }
     }
 

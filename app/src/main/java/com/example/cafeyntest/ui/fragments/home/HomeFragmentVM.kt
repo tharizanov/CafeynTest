@@ -28,7 +28,7 @@ class HomeFragmentVM : ViewModel() {
         event.value = ItemClickedEvent(item)
         Log.d(javaClass.simpleName, "Clicked id: ${item.id}")
 
-        // Fallback due to Fragment subscription not working
+        // Fallback because Fragment's subscription to the event is not working.
         EventBus.getDefault().post(event.value)
     }
 

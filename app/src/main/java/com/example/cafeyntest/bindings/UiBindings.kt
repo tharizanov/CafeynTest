@@ -11,22 +11,21 @@ import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
+import com.example.cafeyntest.R
 import com.example.cafeyntest.domains.ui.HomeRecyclerItem
 import com.example.cafeyntest.storage.ImagePersistenceManager
 import com.example.cafeyntest.ui.adapters.HomeRecyclerAdapter
 
 @BindingAdapter("items")
 fun setHomeRecyclerItems(view: RecyclerView, items: List<HomeRecyclerItem>?) {
-    (view.adapter as? HomeRecyclerAdapter)?.let { adapter ->
-        if (items != null)
-            adapter.setItems(items)
-    }
+    if (items != null)
+        (view.adapter as? HomeRecyclerAdapter)?.setItems(items)
 }
 
-@BindingAdapter("image_url", "placeholder", requireAll = true)
-fun setImageSrc(view: ImageView, url: String?, @DrawableRes placeholderId: Int) {
+@BindingAdapter("image_url", "placeholder", requireAll = false)
+fun setImageSrc(view: ImageView, url: String?, @DrawableRes placeholderId: Int?) {
     if (url.isNullOrEmpty()) {
-        view.setImageResource(placeholderId)
+        view.setImageResource(placeholderId ?: R.drawable.ic_launcher_background)
         return
     }
 
@@ -44,7 +43,7 @@ fun setImageSrc(view: ImageView, url: String?, @DrawableRes placeholderId: Int) 
 
     Glide.with(view)
         .asBitmap()
-        .placeholder(placeholderId)
+        .placeholder(placeholderId ?: R.drawable.ic_launcher_background)
         .listener(getGlideBitmapRequestListener(completeUrl))
         .load(completeUrl)
         .into(view)

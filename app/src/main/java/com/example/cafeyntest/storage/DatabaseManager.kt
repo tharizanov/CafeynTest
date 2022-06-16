@@ -21,11 +21,15 @@ object DatabaseManager {
     }
 
     suspend fun storeItems(items: List<ResponseItem>) {
-        val dbItemsList = ArrayList<PhotoItem>(items.size)
-        for (item in items) {
-            dbItemsList.add(PhotoItem(item.id, item.albumId, item.title, item.url, item.thumbnailUrl))
+        if (items.isEmpty())
+            return
+
+        ArrayList<PhotoItem>(items.size).run {
+            for (item in items) {
+                add(PhotoItem(item.id, item.albumId, item.title, item.url, item.thumbnailUrl))
+            }
+            db.userDao().insertAll(*toTypedArray())
         }
-        db.userDao().insertAll(*dbItemsList.toTypedArray())
     }
 
 }
