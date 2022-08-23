@@ -21,8 +21,8 @@ data class HomeRecyclerItem(
 
     override fun describeContents() = hashCode()
 
-    override fun writeToParcel(dest: Parcel?, flags: Int) {
-        dest?.run {
+    override fun writeToParcel(dest: Parcel, flags: Int) {
+        dest.run {
             writeString(id)
             writeString(albumId)
             writeString(title)
